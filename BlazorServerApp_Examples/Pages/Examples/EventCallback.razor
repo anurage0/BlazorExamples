@@ -1,0 +1,57 @@
+﻿@page "/Examples/EventCallback"
+
+@using BlazorExamples_Models;
+
+
+Id : @Employee.Id
+<br />
+Name : @Employee.Name
+<br />
+Department : @Employee.Department
+<br />
+Department :
+<input type="text" @bind-value="@Employee.Department" @bind-value:event="oninput" />
+<br />
+Skills :
+<select @bind="SelectedSkill">
+    @foreach (var skill in Employee.Skills)
+    {
+        <option>@skill.Name</option>
+    }
+</select>
+<br />
+@if (!String.IsNullOrWhiteSpace(SelectedSkill))
+{
+    <p>Proficiency Level out of 3 : @Employee.Skills.Where(x => x.Name == SelectedSkill).FirstOrDefault()?.Level</p>
+}
+<br />
+Project Assigned? :
+<input type="checkbox" @onchange="AssignmentChanged" />
+<br />
+Number of times Project was assigned : @ProjectAssignedCount
+
+@code {
+    private int ProjectAssignedCount { get; set; } = 0;
+
+    private string SelectedSkill { get; set; } = "";
+    Employee Employee = new()
+        {
+            Id = 1,
+            Name = "John",
+            Department = "IT",
+            Skills = new()
+            {
+                new Skill{Id = 1, Name = "Blazor", Level=1},
+                new Skill{Id = 1, Name = "C#", Level=3},
+                new Skill{Id = 1, Name = "Python", Level=2}
+            }
+        };
+
+    private void AssignmentChanged(ChangeEventArgs args)
+    {
+        if (args.Value != null && (bool)args.Value)
+        {
+            ProjectAssignedCount++;
+        }
+    }
+}

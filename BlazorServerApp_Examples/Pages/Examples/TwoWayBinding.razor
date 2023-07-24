@@ -1,0 +1,22 @@
+﻿@page "/Examples/TwoWayBinding"
+
+@using BlazorExamples_Models;
+
+
+Id : @Employee.Id
+<br />
+Name : @Employee.Name
+<br />
+Department : @Employee.Department
+<br />
+Department :
+<input type="text" @bind-value="@Employee.Department" @bind-value:event="oninput"/>
+
+@code {
+    Employee Employee = new()
+        {
+            Id = 1,
+            Name = "John",
+            Department = "IT"
+        };
+}

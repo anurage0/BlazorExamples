@@ -1,0 +1,33 @@
+﻿@using BlazorExamples_Models;
+
+<h3>_EmployeeParameterized</h3>
+
+Id : @Employee.Id
+<br />
+Name : @Employee.Name
+<br />
+Department : @Employee.Department
+<br />
+Department :
+<input type="text" @bind-value="@Employee.Department" @bind-value:event="oninput" />
+<br />
+Skills :
+<select @bind="SelectedSkill">
+    @foreach (var skill in Employee.Skills)
+    {
+        <option>@skill.Name</option>
+    }
+</select>
+<br />
+@if (!String.IsNullOrWhiteSpace(SelectedSkill))
+{
+    <p>Proficiency Level out of 3 : @Employee.Skills.Where(x => x.Name == SelectedSkill).FirstOrDefault()?.Level</p>
+}
+
+@code {
+    private string SelectedSkill { get; set; } = "";
+
+    [Parameter]
+    public Employee Employee { get; set; }
+
+}

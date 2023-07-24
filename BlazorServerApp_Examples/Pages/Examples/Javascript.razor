@@ -1,0 +1,12 @@
+﻿@page "/Examples/Javascript"
+
+@inject IJSRuntime _jsRuntime
+<h3>Javascript</h3>
+<button @onclick="CallJavascript">Show Javascript Alert</button>
+
+@code {
+    private void CallJavascript()
+    {
+        _jsRuntime.InvokeVoidAsync("ShowAlert", "Javascript Message.");
+    }
+}

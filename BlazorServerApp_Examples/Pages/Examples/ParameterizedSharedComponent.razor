@@ -1,0 +1,21 @@
+﻿@page "/Examples/ParameterizedSharedComponent"
+
+@using BlazorExamples_Models;
+@using BlazorServerApp_Examples.Pages.Examples.ExampleComponents
+
+<h3>ParameterizedSharedComponent</h3>
+<_EmployeeParameterized Employee="@Employee"></_EmployeeParameterized>
+@code {
+    Employee Employee = new()
+        {
+            Id = 1,
+            Name = "John",
+            Department = "IT",
+            Skills = new()
+            {
+                new Skill{Id = 1, Name = "Blazor", Level=1},
+                new Skill{Id = 1, Name = "C#", Level=3},
+                new Skill{Id = 1, Name = "Python", Level=2}
+            }
+        };
+}

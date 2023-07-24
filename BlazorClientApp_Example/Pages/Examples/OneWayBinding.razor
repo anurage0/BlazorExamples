@@ -1,0 +1,17 @@
+﻿@page "/Examples/OneWayBinding"
+@using BlazorExamples_Models;
+
+
+Id : @Employee.Id<br/>
+Name : @Employee.Name<br />
+Department : @Employee.Department<br />
+Department : <input type="text" value="@Employee.Department" />
+
+@code {
+    Employee Employee = new()
+        {
+            Id = 1,
+            Name = "John",
+            Department = "IT"
+        };
+}
